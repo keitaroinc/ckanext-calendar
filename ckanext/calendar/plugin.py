@@ -26,7 +26,11 @@ class CalendarPlugin(plugins.SingletonPlugin):
         toolkit.add_resource('fanstatic', 'calendar')
 
     def get_auth_functions(self):
-        return {'event_create': pauth.event_create}
+        return {
+            'event_create': pauth.event_create,
+            'event_show': pauth.event_show,
+            'event_list': pauth.event_list,
+        }
 
     ## IConfigurable
 

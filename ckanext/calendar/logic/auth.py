@@ -15,6 +15,18 @@ def event_create(context, data_dict):
     out = {
         'success': success,
         'msg': '' if success else
-        t._('User {0} not authorized to create harvest sources')
+        t._('User {0} not authorized to create events')
     }
     return out
+
+
+def event_show(context, data_dict):
+    return {
+        'success': True
+    }
+
+
+def event_list(context, data_dict):
+    return {
+        'success': True
+    }

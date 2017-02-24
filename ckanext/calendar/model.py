@@ -61,9 +61,12 @@ class ckanextEvent(DomainObject):
             return default
 
     @classmethod
-    def filter(cls, **kwds):
+    def search(cls, limit, order, **kwds):
         query = Session.query(cls).autoflush(False)
-        return query.filter_by(**kwds)
+        query = query.filter_by(**kwds)
+        query = query.order_by(order)
+        query = query.limit(limit)
+        return query.all()
 
 
 def define_event_tables():
