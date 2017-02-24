@@ -11,11 +11,12 @@ import logging
 
 import ckan.logic as l
 import ckan.plugins.toolkit as t
-import ckan.lib.helpers as lh
+import ckan.lib.navl.dictization_functions as df
 
 from ckan.common import _
 from ckanext.calendar.model import ckanextEvent, gen_event_name
 from ckanext.calendar.logic.dictization import event_dictize
+from ckanext.calendar.logic import schema
 
 log = logging.getLogger(__name__)
 
@@ -39,27 +40,31 @@ def event_create(context, data_dict):
     :type end: string
 
     :param meta: Additional meta data for the event such as latitude/longitude etc.
-    :type meta: JSON
+    :type meta: string in JSON format
 
     :returns: the newly created event
     :rtype: dictionary
 
     '''
+
     log.info('Event create: %r', data_dict)
 
     l.check_access('event_create', context, data_dict)
 
-    title = l.get_or_bust(data_dict, 'title')
-    start = l.get_or_bust(data_dict, 'start')
-    start = lh.date_str_to_datetime(start)
-    name = gen_event_name(title)
-    description = data_dict.get('description', '')
-    venue = data_dict.get('venue', '')
-    end = lh.date_str_to_datetime(
-        data_dict.get('end', data_dict['start'])
-    )
-    meta = data_dict.get('meta', u'{}')
+    data, errors = df.validate(data_dict, schema.event_create_schema(),
+                               context)
 
+    if errors:
+        raise t.ValidationError(errors)
+
+    title = data.get('title')
+    name = gen_event_name(title)
+    start = data.get('start')
+    end = data.get('end')
+    description = data.get('description', u'')
+    venue = data.get('venue', u'')
+    meta = data.get('meta', u'{}')
+    active = data.get('active', False)
 
     m = context.get('model')
     user_obj = m.User.get(context.get('user'))
@@ -71,6 +76,7 @@ def event_create(context, data_dict):
                          end=end,
                          venue=venue,
                          meta=meta,
+                         active=active,
                          creator_id=user_obj.id)
     event.save()
 

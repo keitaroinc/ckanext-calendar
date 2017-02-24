@@ -4,7 +4,10 @@ from ckan import logic
 from ckan.plugins import toolkit
 
 from ckanext.calendar.model import ckanextEvent
-from ckanext.calendar.logic.dictization import event_dictize, event_list_dictize
+from ckanext.calendar.logic.dictization import (
+    event_dictize,
+    event_list_dictize
+)
 
 log = logging.getLogger(__name__)
 
@@ -13,17 +16,17 @@ log = logging.getLogger(__name__)
 def event_show(context, data_dict):
     '''Return the metadata of an event.
 
-    :param id: the id or name of the dataset
+    :param id: the id of the event
     :type id: string
 
-    :rtype: dict
+    :rtype: dictionary
 
     '''
     log.info('Event show: %r', data_dict)
 
     logic.check_access('event_show', context, data_dict)
 
-    id = data_dict.get('id')
+    id = toolkit.get_or_bust(data_dict, 'id')
 
     event = ckanextEvent.get(key=id, attr='id')
 
@@ -39,20 +42,17 @@ def event_show(context, data_dict):
 def event_list(context, data_dict):
     '''Return a list of last created events (defaults to 5).
 
-    :param limit: limit the number of events to return
+    :param limit: limit the number of events to return (optional)
     :type id: int
 
-    :rtype: list of dicts
+    :rtype: list of dictionaries
 
     '''
-    log.info('Event show: %r', data_dict)
+    log.info('Event list: %r', data_dict)
 
     logic.check_access('event_list', context, data_dict)
 
-    limit = data_dict.get('limit')
-
-    if limit is None:
-        limit = 5
+    limit = data_dict.get('limit', 5)
 
     event_list = ckanextEvent.search(limit=limit, order='created_at desc')
 
