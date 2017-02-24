@@ -30,6 +30,9 @@ class CalendarPlugin(plugins.SingletonPlugin):
             'event_create': pauth.event_create,
             'event_show': pauth.event_show,
             'event_list': pauth.event_list,
+            'event_update': pauth.event_update,
+            'event_patch': pauth.event_patch,
+            'event_delete': pauth.event_delete
         }
 
     ## IConfigurable
