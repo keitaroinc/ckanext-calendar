@@ -51,22 +51,31 @@ class ckanextEvent(DomainObject):
     @classmethod
     def get(cls, key, default=None, attr=None):
         '''Finds a single entity in the register.'''
-        if attr == None:
+        if attr is None:
             attr = cls.key_attr
         kwds = {attr: key}
-        o = cls.filter(**kwds).first()
+        o = Session.query(cls).autoflush(False)
+        o = o.filter_by(**kwds).first()
         if o:
             return o
         else:
             return default
 
     @classmethod
-    def search(cls, limit, order, **kwds):
+    def search(cls, limit, order='id', **kwds):
         query = Session.query(cls).autoflush(False)
         query = query.filter_by(**kwds)
         query = query.order_by(order)
         query = query.limit(limit)
         return query.all()
+
+    @classmethod
+    def delete(cls, id):
+        # Delete single event
+
+        query = Session.query(cls).filter_by(id=id).delete()
+
+        return query
 
 
 def define_event_tables():
