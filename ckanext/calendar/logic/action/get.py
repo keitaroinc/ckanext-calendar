@@ -16,6 +16,8 @@ def event_show(context, data_dict):
     :param id: the id or name of the dataset
     :type id: string
 
+    :rtype: dict
+
     '''
     log.info('Event show: %r', data_dict)
 
