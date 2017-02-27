@@ -37,7 +37,7 @@ def event_patch(context, data_dict):
 
     # Exclude fields from the schema that are not in data_dict
     for field in fields:
-        if field not in data_dict.keys():
+        if field not in data_dict.keys() and field != 'id':
             event_patch_schema.pop(field)
 
     data, errors = df.validate(data_dict, event_patch_schema,
