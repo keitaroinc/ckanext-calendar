@@ -39,6 +39,9 @@ def event_create(context, data_dict):
     :param end: End date of the event.
     :type end: string
 
+    :param active: State of the event (optional). Default is true.
+    :type active: boolean
+
     :param meta: Additional meta data for the event such as latitude/longitude etc.
     :type meta: string in JSON format
 
