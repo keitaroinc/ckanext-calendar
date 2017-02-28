@@ -47,7 +47,7 @@ Parameter | Type | Description
 description | string  | Description of an event.
 venue       | string  | Venue of an event.
 active      | boolean | State of an event. Default is true.
-meta        | string  | Additional meta data for an event such as latitude/longitude etc. Data must be sent as an encoded JSON.
+meta        | string  | Additional meta data for an event such as latitude/longitude etc. Data must be sent as an escaped JSON.
 
 Executing the `event_create` action creates additional fields in the database
 which are automatically created:
@@ -76,6 +76,36 @@ takes the following input parameters:
 Parameter | Type | Description
 --------- | ---- | -----------
 limit | int | Number of events to return. Default is 5.
+
+### `event_update`
+
+The `event_update` action is used to update a single event. For all possible
+parameters see [event_create](#event_create).
+
+Parameter | Type | Description
+--------- | ---- | -----------
+*id | string | Unique id of an event.
+
+### `event_patch`
+
+The `event_patch` action is used to patch a single event. The difference
+between the update and patch methods is that the patch will perform an update
+of the provided parameters, while leaving all other parameters unchanged,
+whereas the update method deletes all parameters not explicitly provided. For
+all possible parameters see [event_create](#event_create).
+
+Parameter | Type | Description
+--------- | ---- | -----------
+*id | string | Unique id of an event.
+
+### `event_delete`
+
+The `event_delete` action is used to delete a single event. It takes the
+following input parameters:
+
+Parameter | Type | Description
+--------- | ---- | -----------
+*id | string | Unique id of an event.
 
 ## Running the Tests
 
