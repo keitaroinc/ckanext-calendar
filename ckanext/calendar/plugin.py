@@ -15,10 +15,11 @@ class CalendarPlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IConfigurable)
     plugins.implements(plugins.IAuthFunctions)
+    plugins.implements(plugins.IRoutes, inherit=True)
 
     startup = False
 
-    ## IConfigurer
+    # IConfigurer
 
     def update_config(self, config_):
         toolkit.add_template_directory(config_, 'templates')
@@ -35,7 +36,7 @@ class CalendarPlugin(plugins.SingletonPlugin):
             'event_delete': pauth.event_delete
         }
 
-    ## IConfigurable
+    # IConfigurable
 
     def configure(self, config):
         self.startup = True
@@ -45,9 +46,20 @@ class CalendarPlugin(plugins.SingletonPlugin):
 
         self.startup = False
 
-    ## IActions
+    # IActions
 
     def get_actions(self):
         module_root = 'ckanext.calendar.logic.action'
         action_functions = _h._scan_functions(module_root)
         return action_functions
+
+    # IRouter
+
+    def before_map(self, map):
+
+        controller = 'ckanext.calendar.controllers.calendar:CalendarController'
+
+        map.connect('event_index', '/events', controller=controller,
+                    action='event_index')
+
+        return map

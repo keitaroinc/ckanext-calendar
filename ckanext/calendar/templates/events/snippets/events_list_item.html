@@ -1,0 +1,13 @@
+<div class="events-list-item">
+  <h3>
+    <a href="#">{{ event.title }}</a>
+    <small class="date">{{ _('From') }}: {{ h.render_datetime(event.start, with_hours=True) }}</small>
+    <br>
+    <small class="date">{{ _('To') }}: {{ h.render_datetime(event.end, with_hours=True) }}</small>
+  </h3>
+  {% if event.description %}
+    <p>{{ event.description }}</p>
+  {% else %}
+    <p>{{ _('No description provided.') }}</p>
+  {% endif %}
+</div>
