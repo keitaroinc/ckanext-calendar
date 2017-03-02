@@ -19,26 +19,6 @@ def event_create(context, data_dict):
     return out
 
 
-def event_show(context, data_dict):
-    '''
-        Authorization check for event show
-    '''
-
-    return {
-        'success': True
-    }
-
-
-def event_list(context, data_dict):
-    '''
-        Authorization check for event list
-    '''
-
-    return {
-        'success': True
-    }
-
-
 def event_update(context, data_dict):
     '''
         Authorization check for event update

@@ -24,8 +24,6 @@ def event_show(context, data_dict):
     '''
     log.info('Event show: %r', data_dict)
 
-    logic.check_access('event_show', context, data_dict)
-
     id = toolkit.get_or_bust(data_dict, 'id')
 
     event = ckanextEvent.get(key=id, attr='id')
@@ -49,8 +47,6 @@ def event_list(context, data_dict):
 
     '''
     log.info('Event list: %r', data_dict)
-
-    logic.check_access('event_list', context, data_dict)
 
     limit = data_dict.get('limit', 5)
 
