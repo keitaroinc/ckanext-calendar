@@ -1,0 +1,36 @@
+{% extends 'events/base.html' %}
+
+{% block subtitle %}{{ event.title }}{% endblock %}
+
+{% block page_primary_action %}
+  {% if h.check_access('event_patch', {}) %}
+    {% link_for _('Manage'), controller='ckanext.calendar.controllers.calendar:CalendarController', action='events_create', class_='btn btn-primary', icon='plus-sign-alt' %}
+  {% endif %}
+{% endblock %}
+
+{% block primary_content_inner %}
+  <div class="event-page-container">
+    <h1>{{ event.title }}</h1>
+
+    <small>
+      <span>{{ _('Venue') }}:</span>
+      {% if event.venue %}
+        <span>{{ event.venue }}</span>
+      {% else %}
+        <span>{{ _('No venue provided.') }}</span>
+      {% endif %}
+    </small>
+    <br>
+    <small>{{ _('From') }}: {{ h.render_datetime(event.start, with_hours=True) }}</small>
+    <br>
+    <small>{{ _('To') }}: {{ h.render_datetime(event.end, with_hours=True) }}</small>
+
+    <div class="event-page-description">
+      {% if event.description %}
+        <p>{{ event.description }}</p>
+      {% else %}
+        <p>{{ _('No description provided.') }}</p>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

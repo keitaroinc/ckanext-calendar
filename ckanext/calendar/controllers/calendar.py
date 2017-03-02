@@ -1,7 +1,9 @@
+import json
+
 from ckan.lib import base
 from ckan.plugins import toolkit
-from ckan import model
-from ckan.common import c
+from ckan import model, logic
+from ckan.common import c, _
 
 
 def _get_context():
@@ -27,3 +29,15 @@ class CalendarController(base.BaseController):
         }
 
         return toolkit.render('events/events_list.html', extra_vars)
+
+    def event_show(self, id):
+        try:
+            event = _get_action('event_show', {'id': id})
+        except (logic.ValidationError, logic.NotFound):
+            toolkit.abort(404, _('Event not found'))
+
+        extra_vars = {
+            'event': event
+        }
+
+        return toolkit.render('events/event_page.html', extra_vars)
