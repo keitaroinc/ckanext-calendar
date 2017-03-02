@@ -9,8 +9,6 @@
 {% endblock %}
 
 {% block primary_content_inner %}
-  <h2>{{ _('Pages') }}</h2>
-
   {% if events | length > 0 %}
     {% for event in events %}
       {% snippet 'events/snippets/events_list_item.html', event=event %}
