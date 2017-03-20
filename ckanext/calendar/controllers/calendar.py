@@ -41,3 +41,13 @@ class CalendarController(base.BaseController):
         }
 
         return toolkit.render('events/event_page.html', extra_vars)
+
+    def event_create(self):
+
+        # TODO implement functionality
+
+        extra_vars = {
+            'events': []
+        }
+
+        return toolkit.render('events/events_list.html', extra_vars)

@@ -63,4 +63,7 @@ class CalendarPlugin(plugins.SingletonPlugin):
         map.connect('event_show', '/events/{id}', controller=controller,
                     action='event_show')
 
+        map.connect('event_create', '/events', controller=controller,
+                    action='event_create')
+
         return map
