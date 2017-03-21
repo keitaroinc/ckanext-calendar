@@ -1,15 +1,44 @@
 {% set event_url = h.url_for('event_show', id=event.id) %}
 
 <div class="events-list-item">
-  <h3>
-    <a href="{{ event_url }}">{{ event.title }}</a>
-    <small class="date">{{ _('From') }}: {{ h.render_datetime(event.start, with_hours=True) }}</small>
-    <br>
-    <small class="date">{{ _('To') }}: {{ h.render_datetime(event.end, with_hours=True) }}</small>
-  </h3>
-  {% if event.description %}
-    <p>{{ event.description }}</p>
-  {% else %}
-    <p>{{ _('No description provided.') }}</p>
-  {% endif %}
+  <div class="row">
+    <div class="col-lg-9">
+      <h3 class="page-heading"><a href="{{ event_url }}" title="View {{ event.title }}">{{ event.title }}</a></h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3">
+      <dl class="list-event-meta">
+        <dt><span class="fa fa-clock-o"></span><span class="fa-label">{{ _('Starts') }}</span></dt>
+        <dd>{{ h.render_datetime(event.start, with_hours=True) }}</dd>
+      </dl>
+    </div>
+    <div class="col-lg-3">
+      <dl class="list-event-meta">
+        <dt><span class="fa fa-globe"></span><span class="fa-label">Venue</span></dt>
+        <dd>{{event.venue}}</dd>
+      </dl>
+    </div>
+    <div class="col-lg-3">
+      <dl class="list-event-meta">
+        <dt><span class="fa fa-hourglass-o"></span><span class="fa-label">{{ _('Ends') }}</span></dt>
+        <dd>{{ h.render_datetime(event.end, with_hours=True) }}</dd>
+      </dl>
+    </div>
+    <div class="col-lg-3">
+      <ul class="list-inline event-actions">
+        <li><a href="#" class="btn btn-default"><span class="sr-only">{{_('Edit')}}</span><span class="fa fa-pencil"></span></a></li>
+        <li><a href="#" class="btn btn-danger"><span class="sr-only">{{_('Delete')}}</span><span class="fa fa-trash"></span></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-9">
+      {% if event.description %}
+      <p>{{ event.description }}</p>
+      {% else %}
+      <p>{{ _('No description provided.') }}</p>
+      {% endif %}
+    </div>
+  </div>
 </div>
