@@ -1,6 +1,12 @@
+{% resource 'calendar/javascript/jquery-ui.js' %}
+{% resource 'calendar/javascript/ckanext-calendar.js' %}
 {% extends 'page.html' %}
 
-{% block styles %}
-  {{ super() }}
-  {% resource 'calendar/css/main.css' %}
+{% block custom_styles %}
+{{ super() }}
+<link rel="stylesheet" href="/css/jquery-ui-datepicker.css">
+<link rel="stylesheet" href="/css/ckanext-calendar.css">
+{% endblock %}
+
+{% block scripts %}
 {% endblock %}
