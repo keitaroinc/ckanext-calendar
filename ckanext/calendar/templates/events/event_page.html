@@ -3,34 +3,59 @@
 {% block subtitle %}{{ event.title }}{% endblock %}
 
 {% block page_primary_action %}
-  {% if h.check_access('event_patch', {}) %}
-    {% link_for _('Manage'), controller='ckanext.calendar.controllers.calendar:CalendarController', action='events_create', class_='btn btn-primary', icon='plus-sign-alt' %}
-  {% endif %}
+{% if h.check_access('event_patch', {}) %}
+{% endif %}
+{% endblock %}
+
+{% block page_header %}
 {% endblock %}
 
 {% block primary_content_inner %}
-  <div class="event-page-container">
-    <h1>{{ event.title }}</h1>
-
-    <small>
-      <span>{{ _('Venue') }}:</span>
-      {% if event.venue %}
-        <span>{{ event.venue }}</span>
-      {% else %}
-        <span>{{ _('No venue provided.') }}</span>
-      {% endif %}
-    </small>
-    <br>
-    <small>{{ _('From') }}: {{ h.render_datetime(event.start, with_hours=True) }}</small>
-    <br>
-    <small>{{ _('To') }}: {{ h.render_datetime(event.end, with_hours=True) }}</small>
-
-    <div class="event-page-description">
-      {% if event.description %}
+<div class="event-page-container">
+  <div class="events-list-item">
+    <div class="row">
+      <div class="col-lg-9">
+        <h1 class="page-heading"><a href="{{ event_url }}" title="View {{ event.title }}">{{ event.title }}</a></h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3">
+        <dl class="list-event-meta">
+          <dt><span class="fa fa-clock-o"></span><span class="fa-label">{{ _('Starts') }}</span></dt>
+          <dd>{{ h.render_datetime(event.start, with_hours=True) }}</dd>
+        </dl>
+      </div>
+      <div class="col-lg-3">
+        <dl class="list-event-meta">
+          <dt><span class="fa fa-globe"></span><span class="fa-label">Venue</span></dt>
+          <dd>{{event.venue}}</dd>
+        </dl>
+      </div>
+      <div class="col-lg-3">
+        <dl class="list-event-meta">
+          <dt><span class="fa fa-hourglass-o"></span><span class="fa-label">{{ _('Ends') }}</span></dt>
+          <dd>{{ h.render_datetime(event.end, with_hours=True) }}</dd>
+        </dl>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-9">
+        {% if event.description %}
         <p>{{ event.description }}</p>
-      {% else %}
+        {% else %}
         <p>{{ _('No description provided.') }}</p>
-      {% endif %}
+        {% endif %}
+      </div>
     </div>
   </div>
+  <form id="delete-event-form">
+    <div class="form-actions">
+      <button class="btn btn-danger pull-left" name="save" type="submit">{{_('Delete Event')}}</button>
+      <button class="btn btn-primary" name="save" type="submit">{{_('Edit Event')}}</button>
+    </div>
+  </form>
+</div>
+{% endblock %}
+
+{% block secondary_content %}
 {% endblock %}
