@@ -5,7 +5,10 @@
 {{ super() }}
 {% endblock %}
 
-{% block subtitle %}{{ _('Events') }}{% endblock %}
+
+{% block page_header %}
+{% endblock %}
+
 
 {% block page_primary_action %}
 {% if h.check_access('event_create', {}) %}
@@ -22,30 +25,60 @@
 <p>{{ _('No events found.') }}</p>
 {% endif %}
 
-<!-- Adding <hr> as a separator. No need to include in the templates -->
-<hr>
-<!-- Adding <hr> as a separator. No need to include in the templates -->
+<br>
+<br>
+<br>
 
 {% block add_event_form %}
-<h1 class="page-heading">Add Event</h1>
+<h1 class="page-heading">{{_('Add Event')}}</h1>
 <form id="add-event-form">
   <div class="form-group">
-
-    {{ form.input('event-name', id='event-name', label=_('Name'), placeholder='Name your event', classes=['control-full ', 'control-large']) }}
-    {{ form.markdown('event-description', id='event-description', label=_('Description'), placeholder=_('Describe the event briefly or in more details'), is_required=true) }}
-
+    {{ form.input('event-name', id='event-name', label=_('Name'), placeholder='Name your event', classes=['control-full ', 'control-large'], is_required=true) }}
     <div class="row">
-      <div class="col-md-6">
-        {{ form.input('event-start-date', id='event-start-date', label=_('Start date'), placeholder='Start date of the event', classes=[]) }}
-        {{ form.input('event-end-date', id='event-end-date', label=_('End date'), placeholder='End date of the event', classes=[]) }}
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        {{ form.input('event-start-date', id='event-start-date', type="hidden", label=_('Start date'), placeholder='Start date of the event', classes=['date-picker'], is_required=true) }}
       </div>
-      <div class="col-md-6">
-        {{ form.textarea('event-geolocation', id='event-geolocation', label=_('Geolocation Coordinates'), placeholder=_('Add event geocoordinates in JSON format')) }}
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        {{ form.input('event-end-date', id='event-end-date', type="hidden", label=_('End date'), placeholder='End date of the event', classes=['date-picker']) }}
+      </div>
+      <div class="col-lg-6 col-md-4 col-sm-12">
+        {{ form.input('event-venue', id='event-venue', label=_('Venue'), placeholder=_('Where is the event talking place?'), is_required=true) }}
+        {{ form.markdown('event-description', id='event-description', label=_('Description'), placeholder=_('Describe the event briefly or in more details')) }}
       </div>
     </div>
   </div>
   <div class="form-actions">
+    <button class="btn btn-danger pull-left" name="save" type="submit">{{_('Cancel')}}</button>
     <button class="btn btn-primary" name="save" type="submit">{{_('Add Event')}}</button>
+  </div>
+</form>
+{% endblock %}
+
+<br>
+<br>
+<br>
+
+{% block edit_event_form %}
+<h1 class="page-heading">{{_('Edit Event')}}</h1>
+<form id="edit-event-form">
+  <div class="form-group">
+    {{ form.input('event-name', id='event-name', label=_('Name'), placeholder='Name your event', classes=['control-full ', 'control-large'], is_required=true) }}
+    <div class="row">
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        {{ form.input('event-start-date', id='event-start-date', type="hidden", label=_('Start date'), placeholder='Start date of the event', classes=['date-picker'], is_required=true) }}
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        {{ form.input('event-end-date', id='event-end-date', type="hidden", label=_('End date'), placeholder='End date of the event', classes=['date-picker']) }}
+      </div>
+      <div class="col-lg-6 col-md-4 col-sm-12">
+        {{ form.input('event-venue', id='event-venue', label=_('Venue'), placeholder=_('Venue of the event'), is_required=true) }}
+        {{ form.markdown('event-description', id='event-description', label=_('Description'), placeholder=_('Describe the event briefly or in more details')) }}
+      </div>
+    </div>
+  </div>
+  <div class="form-actions">
+    <button class="btn btn-danger pull-left" name="save" type="submit">{{_('Cancel')}}</button>
+    <button class="btn btn-primary" name="save" type="submit">{{_('Update Event')}}</button>
   </div>
 </form>
 {% endblock %}
