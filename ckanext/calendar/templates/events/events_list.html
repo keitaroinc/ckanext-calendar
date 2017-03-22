@@ -59,10 +59,12 @@
     {{ form.input('event-name', id='event-name', label=_('Name'), placeholder='Name your event', classes=['control-full ', 'control-large'], is_required=true) }}
     <div class="row">
       <div class="col-lg-3 col-md-4 col-sm-6">
-        {{ form.input('event-start-date', id='event-start-date', type="hidden", label=_('Start date'), placeholder='Start date of the event', classes=['date-picker'], is_required=true) }}
+        {{ form.input('add-event-start-date-input', id='add-event-start-date-input', type="hidden", label=_('Start date'), placeholder='Start date of the event', is_required=true) }}
+        <div class="date-picker" id="add-event-start-date"></div>
       </div>
       <div class="col-lg-3 col-md-4 col-sm-6">
-        {{ form.input('event-end-date', id='event-end-date', type="hidden", label=_('End date'), placeholder='End date of the event', classes=['date-picker']) }}
+        {{ form.input('add-event-end-date-input', id='add-event-end-date-input', type="hidden", label=_('End date'), placeholder='End date of the event') }}
+        <div class="date-picker" id="add-event-end-date"></div>
       </div>
       <div class="col-lg-6 col-md-4 col-sm-12">
         {{ form.input('event-venue', id='event-venue', label=_('Venue'), placeholder=_('Where is the event talking place?'), is_required=true) }}
@@ -88,10 +90,12 @@
     {{ form.input('event-name', id='event-name', label=_('Name'), placeholder='Name your event', classes=['control-full ', 'control-large'], is_required=true) }}
     <div class="row">
       <div class="col-lg-3 col-md-4 col-sm-6">
-        {{ form.input('event-start-date', id='event-start-date', type="hidden", label=_('Start date'), placeholder='Start date of the event', classes=['date-picker'], is_required=true) }}
+        {{ form.input('event-start-date', id='edit-event-start-date-input', type="hidden", label=_('Start date'), placeholder='Start date of the event', is_required=true) }}
+        <div class="date-picker" id="edit-event-start-date"></div>
       </div>
       <div class="col-lg-3 col-md-4 col-sm-6">
-        {{ form.input('event-end-date', id='event-end-date', type="hidden", label=_('End date'), placeholder='End date of the event', classes=['date-picker']) }}
+        {{ form.input('event-end-date', id='edit-event-end-date-input', type="hidden", label=_('End date'), placeholder='End date of the event') }}
+        <div class="date-picker" id="edit-event-end-date"></div>
       </div>
       <div class="col-lg-6 col-md-4 col-sm-12">
         {{ form.input('event-venue', id='event-venue', label=_('Venue'), placeholder=_('Venue of the event'), is_required=true) }}
