@@ -1,9 +1,14 @@
 import json
+import logging
 
 from ckan.lib import base
 from ckan.plugins import toolkit
 from ckan import model, logic
-from ckan.common import c, _
+from ckan.common import c, _, request
+import ckan.lib.helpers as h
+
+
+log = logging.getLogger(__name__)
 
 
 def _get_context():
@@ -42,12 +47,53 @@ class CalendarController(base.BaseController):
 
         return toolkit.render('events/event_page.html', extra_vars)
 
-    def event_create(self):
+    def event_create(self, data=None):
+        print 'INTO EVENT CREATE'
+        log.debug(request.method)
+        print request.GET
+        if request.method.lower() == 'post':
+            fields = {
+                'title': request.POST['event-name'],
+                'description': request.POST['event-description'],
+                'start': request.POST['event-start-date'],
+                'end': request.POST['event-end-date']
+            }
 
-        # TODO implement functionality
+            result = _get_action('event_create', fields)
 
+            h.flash_notice(_('Event created'))
+            return self.event_index()
+
+        return toolkit.render('events/event_form.html', extra_vars={})
+
+    def event_update(self, id):
+        event = _get_action('event_show', {'id': id})
         extra_vars = {
-            'events': []
+            'event': event
         }
 
-        return toolkit.render('events/events_list.html', extra_vars)
+        if request.method.lower() == 'post':
+            fields = {
+                'id': id,
+                'title': request.POST['event-name'],
+                'description': request.POST['event-description'],
+                'start': request.POST['event-start-date'],
+                'end': request.POST['event-end-date']
+            }
+
+            result = _get_action('event_update', fields)
+
+            print result
+            h.flash_notice(_('Event updated'))
+            return self.event_show(id)
+
+
+        return toolkit.render('events/event_update.html', extra_vars)
+
+    def event_delete(self, id):
+        event = _get_action('event_delete', {'id': id})
+
+        h.flash_notice(_('Event removed'))
+
+        return self.event_show(id)
+        
