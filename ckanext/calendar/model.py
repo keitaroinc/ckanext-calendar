@@ -73,9 +73,9 @@ class ckanextEvent(DomainObject):
     def delete(cls, id):
         # Delete single event
 
-        query = Session.query(cls).filter_by(id=id).delete()
-
-        return query
+        obj = Session.query(cls).filter_by(id=id)
+        Session.delete(obj)
+        Session.commit
 
 
 def define_event_tables():

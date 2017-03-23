@@ -50,8 +50,17 @@
   </div>
   <form id="delete-event-form">
     <div class="form-actions">
-      <button class="btn btn-danger pull-left" name="save" type="submit">{{_('Delete Event')}}</button>
-      <button class="btn btn-primary" name="save" type="submit">{{_('Edit Event')}}</button>
+      {% block eventdelete %}
+          {% if h.check_access('event_delete', {}) %}
+          {% link_for _('Delete Event'), controller='ckanext.calendar.controllers.calendar:CalendarController', id=event.id, action='event_delete', class_='btn btn-danger pull-left' %}
+          {% endif %}
+      {% endblock %}
+      <!--<button class="btn btn-danger pull-left" name="save" type="submit">{{_('Delete Event')}}</button>-->
+      {% block eventupdate %}
+          {% if h.check_access('event_update', {}) %}
+          {% link_for _('Edit Event'), controller='ckanext.calendar.controllers.calendar:CalendarController', id=event.id, action='event_update', class_='btn btn-primary' %}
+          {% endif %}
+      {% endblock %}
     </div>
   </form>
 </div>

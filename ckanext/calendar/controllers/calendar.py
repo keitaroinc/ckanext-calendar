@@ -50,13 +50,16 @@ class CalendarController(base.BaseController):
     def event_create(self, data=None):
         print 'INTO EVENT CREATE'
         log.debug(request.method)
-        print request.GET
+        print request
+        for key in request.GET:
+            print key
         if request.method.lower() == 'post':
             fields = {
                 'title': request.POST['event-name'],
                 'description': request.POST['event-description'],
-                'start': request.POST['event-start-date'],
-                'end': request.POST['event-end-date']
+                'start': request.POST['add-event-start-date-input'],
+                'end': request.POST['add-event-end-date-input'],
+                'venue': request.POST['event-venue']
             }
 
             result = _get_action('event_create', fields)
@@ -74,11 +77,12 @@ class CalendarController(base.BaseController):
 
         if request.method.lower() == 'post':
             fields = {
-                'id': id,
                 'title': request.POST['event-name'],
                 'description': request.POST['event-description'],
-                'start': request.POST['event-start-date'],
-                'end': request.POST['event-end-date']
+                'start': request.POST['add-event-start-date-input'],
+                'end': request.POST['add-event-end-date-input'],
+                'venue': request.POST['event-venue'],
+                'id':id
             }
 
             result = _get_action('event_update', fields)
@@ -95,5 +99,5 @@ class CalendarController(base.BaseController):
 
         h.flash_notice(_('Event removed'))
 
-        return self.event_show(id)
+        return self.event_index()
         
