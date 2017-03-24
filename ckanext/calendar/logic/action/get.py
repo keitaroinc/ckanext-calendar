@@ -38,9 +38,11 @@ def event_show(context, data_dict):
 
 @toolkit.side_effect_free
 def event_list(context, data_dict):
-    '''Return a list of last created events (defaults to 5).
+    '''Return a list of created events ordered by date of creation (DESC) (defaults to 5).
 
     :param limit: limit the number of events to return (optional)
+    :type id: int
+    :param offset: offset  the results (defaults to 0)
     :type id: int
 
     :rtype: list of dictionaries
@@ -49,9 +51,15 @@ def event_list(context, data_dict):
     log.info('Event list: %r', data_dict)
 
     limit = data_dict.get('limit', 5)
+    offset = data_dict.get('offset', 0)
 
-    event_list = ckanextEvent.search(limit=limit, order='created_at desc')
+    event_list = ckanextEvent.search(limit=limit, offset=offset, order='created_at desc')
+    cnt = context['session'].query(ckanextEvent).count()
 
-    out = event_list_dictize(event_list)
+    # TODO: Update tests
+    out = {}
+    out['events'] = event_list_dictize(event_list)
+    out['count'] = cnt
+
 
     return out

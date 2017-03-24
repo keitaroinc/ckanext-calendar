@@ -18,8 +18,6 @@ def event_delete(context, data_dict):
 
     '''
 
-    log.info('Event delete: %r', data_dict)
-
     logic.check_access('event_delete', context, data_dict)
 
     id = toolkit.get_or_bust(data_dict, 'id')
@@ -28,7 +26,8 @@ def event_delete(context, data_dict):
 
     if event == 0:
         raise logic.NotFound
-
+    
+    log.info('Event delete: %r', data_dict)
     return {
         'message': 'Event successfully deleted'
     }
