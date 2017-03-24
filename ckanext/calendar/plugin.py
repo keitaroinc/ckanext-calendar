@@ -7,6 +7,8 @@ from ckanext.calendar.model import setup as model_setup
 import ckanext.calendar.helpers as _h
 import ckanext.calendar.logic.auth as pauth
 
+from routes.mapper import SubMapper
+
 log = logging.getLogger(__name__)
 
 
@@ -16,6 +18,7 @@ class CalendarPlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurable)
     plugins.implements(plugins.IAuthFunctions)
     plugins.implements(plugins.IRoutes, inherit=True)
+    plugins.implements(plugins.ITemplateHelpers)
 
     startup = False
 
@@ -51,19 +54,27 @@ class CalendarPlugin(plugins.SingletonPlugin):
         action_functions = _h._scan_functions(module_root)
         return action_functions
 
+    # ITemplateHelpers
+
+    def get_helpers(self):
+        return {
+            'calendar_get_current_url': _h.calendar_get_current_url
+        }
+
     # IRouter
 
     def before_map(self, map):
 
-        controller = 'ckanext.calendar.controllers.calendar:CalendarController'
-
-        map.connect('event_index', '/events', controller=controller,
-                    action='event_index')
-
-        map.connect('event_show', '/events/{id}', controller=controller,
-                    action='event_show')
-
-        map.connect('event_create', '/events', controller=controller,
-                    action='event_create')
-
+        ctrl = 'ckanext.calendar.controllers.calendar:CalendarController'
+        with SubMapper(map, controller=ctrl) as m:
+            m.connect('event_index', '/events', action='event_index')
+            m.connect('event_create', '/events/create',
+                        action='event_create')
+            m.connect('event_delete', '/events/delete/{id}', 
+                        action='event_delete')
+            m.connect('event_show', '/events/{id}',
+                        action='event_show')
+            m.connect('event_update', '/events/update/{id}',
+                        action='event_update')
+            
         return map
