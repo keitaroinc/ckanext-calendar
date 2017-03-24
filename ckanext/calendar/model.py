@@ -62,20 +62,20 @@ class ckanextEvent(DomainObject):
             return default
 
     @classmethod
-    def search(cls, limit, order='id', **kwds):
+    def search(cls, limit, offset=0, order='id', **kwds):
         query = Session.query(cls).autoflush(False)
         query = query.filter_by(**kwds)
         query = query.order_by(order)
-        query = query.limit(limit)
+        query = query.limit(limit).offset(offset)
         return query.all()
 
     @classmethod
     def delete(cls, id):
         # Delete single event
 
-        query = Session.query(cls).filter_by(id=id).delete()
-
-        return query
+        obj = Session.query(cls).filter_by(id=id)
+        obj.delete()
+        Session.commit()
 
 
 def define_event_tables():
