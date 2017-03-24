@@ -44,7 +44,7 @@ class CalendarController(base.BaseController):
         # TODO: Handle errors
         page = self.__get_page_number(request.params)
         limit = int(config.get('ckanext.calendar.events_show_limit', 3))
-        pagination_limit = int(config.get('ckanext.calendar.show_pagination_pages_limit', 3))
+        pagination_limit = int(config.get('ckanext.calendar.pagination_limit', 3))
         c.page = page
         c.limit = limit
         c.pagination_limit = pagination_limit

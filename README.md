@@ -17,16 +17,16 @@ pip install -r dev-requirements.txt
 
 ## Config Settings
 
-Add resource rows preview limit, default max is 3:
+Add shown events per page limit, default max is 3:
 
 ```
-ckanext.dataextractor.resource_rows_limit = ...
+ckanext.calendar.events_show_limit = ...
 ```
 
 Add pagination pages shown limit, default max is 3::
 
 ```
-ckanext.dataextractor.pagination_limit = ...
+ckanext.calendar.pagination_limit = ...
 ```
 
 
