@@ -3,10 +3,10 @@ import logging
 import uuid
 import ckan.model as m
 import ckanext.calendar.model as cm
+import ckan.lib.helpers as h
+from urllib import urlencode
 
 log = logging.getLogger(__name__)
-
-
 
 
 def _scan_functions(module_root, _functions={}):
@@ -23,9 +23,8 @@ def _scan_functions(module_root, _functions={}):
             if not key.startswith('_') and (hasattr(value, '__call__')
                                             and (value.__module__ == module_path)):
                 _functions[key] = value
-    log.debug('SCANNED FUNCS')
-    log.debug(_functions)
     return _functions
+
 
 def user_is_sysadmin(context):
     '''
@@ -40,3 +39,19 @@ def user_is_sysadmin(context):
         return False
 
     return user_obj.sysadmin
+
+
+def calendar_get_current_url(page, params, controller, action, exclude_param=''):
+    url = h.url_for(controller=controller, action=action)
+    for k, v in params:
+        if k == exclude_param:
+            params.remove((k, v))
+
+    params = [(k, v.encode('utf-8') if isinstance(v, basestring) else str(v))
+              for k, v in params]
+
+    url = url + u'?page=' + str(page)
+    if (params):
+        url = url + u'?page=' + str(page) + '&' + urlencode(params)
+
+    return url
