@@ -50,7 +50,6 @@ class CalendarController(base.BaseController):
         c.pagination_limit = pagination_limit
         offset = (page - 1) * limit if page > 1 else 0
         data = _get_action('event_list', {'limit': limit, 'offset': offset })
-        log.debug(data)
         c.total = data['count']
         extra_vars = {
             'events': data['events']
