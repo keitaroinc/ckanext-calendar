@@ -1,6 +1,13 @@
 import json
 import logging
 
+try:
+    # CKAN 2.7 and later
+    from ckan.common import config
+except ImportError:
+    # CKAN 2.6 and earlier
+    from pylons import config
+
 from ckan.lib import base
 from ckan.plugins import toolkit
 from ckan import model, logic
@@ -12,8 +19,6 @@ import ckan.plugins as p
 log = logging.getLogger(__name__)
 redirect = base.redirect
 
-# TODO: Load limit from config var
-LIMIT = 5
 
 def _get_context():
     return {
@@ -38,10 +43,14 @@ class CalendarController(base.BaseController):
     def event_index(self):
         # TODO: Handle errors
         page = self.__get_page_number(request.params)
+        limit = int(config.get('ckanext.calendar.events_show_limit', 3))
+        pagination_limit = int(config.get('ckanext.calendar.show_pagination_pages_limit', 3))
         c.page = page
-        c.limit = LIMIT
-        offset = (page - 1) * LIMIT if page > 1 else 0
-        data = _get_action('event_list', {'limit': LIMIT, 'offset': offset })
+        c.limit = limit
+        c.pagination_limit = pagination_limit
+        offset = (page - 1) * limit if page > 1 else 0
+        data = _get_action('event_list', {'limit': limit, 'offset': offset })
+        log.debug(data)
         c.total = data['count']
         extra_vars = {
             'events': data['events']

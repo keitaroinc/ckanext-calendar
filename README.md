@@ -15,6 +15,21 @@ python setup.py develop
 pip install -r dev-requirements.txt
 ```
 
+## Config Settings
+
+Add resource rows preview limit, default max is 3:
+
+```
+ckanext.dataextractor.resource_rows_limit = ...
+```
+
+Add pagination pages shown limit, default max is 3::
+
+```
+ckanext.dataextractor.pagination_limit = ...
+```
+
+
 ## API
 
 Available actions to use:
