@@ -129,3 +129,11 @@ To run the tests, do:
 ```
 nosetests --ckan --with-pylons=test.ini
 ```
+
+-------------
+Documentation
+-------------
+
+In order to view the documentation for all API actions open `documentation/index.html`.
+
+If you want to update or rebuild the documentation please visit the `guide for writing documentation <http://docs.ckan.org/en/latest/contributing/documentation.html/>`_.
