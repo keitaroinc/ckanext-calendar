@@ -7,9 +7,9 @@
 
 {% block page_header %}
 {% endblock %}
-
+{% set read_url = h.url_for('event_show', id=event.id) %}
 {% block primary_content_inner %}
-<h1 class="page-heading">{{_('Edit Event')}}</h1>
+<h1 class="page-heading">{{_('Edit Event')}} - <a href="{{ read_url }}" title="Edit {{ event.title }}">{{ event.title }}</a></h1>
 <form id="add-event-form" method="post">
   <div class="form-group">
     {{ form.input('event-name', id='event-name', value=event.title, label=_('Name'), placeholder='Name your event', classes=['control-full ', 'control-large'], is_required=true) }}
@@ -30,7 +30,7 @@
 </div>
   <div class="form-actions">
     <button class="btn btn-danger pull-left" name="save" type="reset">{{_('Cancel')}}</button>
-    <button class="btn btn-primary" name="save" type="submit">{{_('Edit Event')}}</button>
+    <button class="btn btn-primary" name="save" type="submit">{{_('Save')}}</button>
   </div>
 </form>
 {% endblock %}
