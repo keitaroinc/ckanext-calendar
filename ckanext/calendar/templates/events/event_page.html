@@ -10,6 +10,7 @@
 {% block page_header %}
 {% endblock %}
 
+
 {% block primary_content_inner %}
 <div class="event-page-container">
   <div class="events-list-item">
@@ -41,7 +42,7 @@
     <div class="row">
       <div class="col-lg-9">
         {% if event.description %}
-        <p>{{ event.description }}</p>
+        <p>{{ h.render_markdown(event.description) }}</p>
         {% else %}
         <p>{{ _('No description provided.') }}</p>
         {% endif %}
