@@ -58,7 +58,8 @@ class CalendarPlugin(plugins.SingletonPlugin):
 
     def get_helpers(self):
         return {
-            'calendar_get_current_url': _h.calendar_get_current_url
+            'calendar_get_current_url': _h.calendar_get_current_url,
+            'calendar_get_recent_events': _h.calendar_get_recent_events
         }
 
     # IRouter
