@@ -6,6 +6,13 @@ import ckanext.calendar.model as cm
 import ckan.lib.helpers as h
 from urllib import urlencode
 
+try:
+    # CKAN 2.7 and later
+    from ckan.common import config
+except ImportError:
+    # CKAN 2.6 and earlier
+    from pylons import config
+
 log = logging.getLogger(__name__)
 
 
@@ -55,3 +62,11 @@ def calendar_get_current_url(page, params, controller, action, exclude_param='')
         url = url + u'?page=' + str(page) + '&' + urlencode(params)
 
     return url
+
+
+def calendar_get_recent_events():
+    limit = int(config.get('ckanext.calendar.recent_events_limit', 5))
+    _ = m.Session.query(cm.ckanextEvent) \
+        .order_by(cm.ckanextEvent.created_at.desc()) \
+        .limit(limit).all()
+    return _
