@@ -102,7 +102,7 @@ class CalendarController(base.BaseController):
             }
             _get_action('event_update', fields)
             h.flash_success(_('The event was updated successfully.'))
-            redirect(h.url_for('event_show', id=id))
+            redirect(h.url_for('event_update', id=id))
 
         return toolkit.render('events/event_update.html', extra_vars)
 
