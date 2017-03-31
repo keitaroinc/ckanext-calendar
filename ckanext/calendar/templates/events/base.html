@@ -29,10 +29,14 @@
     </h2>
     <div class="module-content">
       <ul class="list-arrows">
-        <li><a href="#">Aliquam eget mauris sed turpis aliquam dictum</a></li>
-        <li><a href="#">Lorem ipsum dolor sit amet</a></li>
-        <li><a href="#">Quisque eu sapien at neque vestibulum dictum in nec orci</a></li>
-        <li><a href="#">Nulla luctus dui ut erat aliquet</a></li>
+        {% set recent_events = h.calendar_get_recent_events() %}
+        {% if recent_events %}
+          {% for event in recent_events %}
+            <li><a href="{{h.url_for('event_show', id=event.id)}}">{{event.title}}</a></li>
+          {% endfor %}
+        {% else %}
+          {{ _('No events are created in the system.') }}
+        {% endif %}
       </ul>
     </div>
   </div>
