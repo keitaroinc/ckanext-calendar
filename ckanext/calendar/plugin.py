@@ -65,17 +65,16 @@ class CalendarPlugin(plugins.SingletonPlugin):
     # IRouter
 
     def before_map(self, map):
-
         ctrl = 'ckanext.calendar.controllers.calendar:CalendarController'
         with SubMapper(map, controller=ctrl) as m:
             m.connect('event_index', '/events', action='event_index')
             m.connect('event_create', '/events/create',
-                        action='event_create')
-            m.connect('event_delete', '/events/delete/{id}', 
-                        action='event_delete')
+                      action='event_create')
+            m.connect('event_delete', '/events/delete/{id}',
+                      action='event_delete')
             m.connect('event_show', '/events/{id}',
-                        action='event_show')
+                      action='event_show')
             m.connect('event_update', '/events/update/{id}',
-                        action='event_update')
-            
+                      action='event_update')
+
         return map
