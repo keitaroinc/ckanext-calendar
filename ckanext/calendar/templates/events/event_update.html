@@ -1,6 +1,8 @@
 {% extends 'events/base.html' %}
 {% import 'macros/form.html' as form %}
 
+{% set errors = errors or {} %}
+
 {% block toolbar %}
 {{ super() }}
 {% endblock %}
@@ -8,28 +10,29 @@
 {% block page_header %}
 {% endblock %}
 {% set read_url = h.url_for('event_show', id=event.id) %}
+{% set cancel_url = h.url_for('event_index') %}
 {% block primary_content_inner %}
-<h1 class="page-heading">{{_('Edit Event')}} - <a href="{{ read_url }}" title="Edit {{ event.title }}">{{ event.title }}</a></h1>
-<form id="add-event-form" method="post">
+<h1 class="page-heading">{{_('Edit Event')}} - <a href="{{ read_url }}" title="Edit {{ event_current_title }}">{{ event_current_title }}</a></h1>
+<form id="update-event-form" method="post">
   <div class="form-group">
-    {{ form.input('event-name', id='event-name', value=event.title, label=_('Name'), placeholder='Name your event', classes=['control-full ', 'control-large'], is_required=true) }}
+    {{ form.input('title', id='title', value=event.title, error=errors.title, label=_('Name'), placeholder='Name your event', classes=['control-full ', 'control-large'], is_required=true) }}
     <div class="row">
       <div class="col-lg-3 col-md-4 col-sm-6">
-        {{ form.input('add-event-start-date-input', type='datetime', value=event.start, id='add-event-start-date-input', label=_('Start date'), is_required=true) }}
+        {{ form.input('start', type='datetime', value=event.start, error=errors.start, id='add-event-start-date-input', label=_('Start date'), is_required=true) }}
         <div class="date-picker" id="add-event-start-date"></div>
       </div>
       <div class="col-lg-3 col-md-4 col-sm-6">
-        {{ form.input('add-event-end-date-input', value=event.end, id='add-event-end-date-input', label=_('End date')) }}
+        {{ form.input('end', value=event.end, error=errors.end, id='add-event-end-date-input', label=_('End date'), is_required=true) }}
         <div class="date-picker" id="add-event-end-date"></div>
       </div>
       <div class="col-lg-6 col-md-4 col-sm-12">
-        {{ form.input('event-venue', value=event.venue, id='event-venue', label=_('Venue'), placeholder=_('Where is the event talking place?'), is_required=true) }}
-        {{ form.markdown('event-description', value=event.description, id='event-description', label=_('Description'), placeholder=_('Describe the event briefly or in more details')) }}
+        {{ form.input('venue', value=event.venue, id='event-venue', label=_('Venue'), placeholder=_('Where is the event talking place?')) }}
+        {{ form.markdown('description', value=event.description, id='event-description', label=_('Description'), placeholder=_('Describe the event briefly or in more details')) }}
       </div>
     </div>
 </div>
   <div class="form-actions">
-    <button class="btn btn-danger pull-left" name="save" type="reset">{{_('Cancel')}}</button>
+    <a class="btn pull-left btn-danger" href="{{ cancel_url }}">{{ _('Cancel') }}</a>
     <button class="btn btn-primary" name="save" type="submit">{{_('Save')}}</button>
   </div>
 </form>
