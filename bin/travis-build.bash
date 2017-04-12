@@ -35,7 +35,7 @@ cd -
 echo "Installing ckanext-calendar and its requirements..."
 python setup.py develop
 pip install -r dev-requirements.txt
-paster calendar initdb -c ckan/test-core.ini
+paster --plugin=ckanext-calendar calendar initdb -c ckan/test-core.ini
 
 echo "Moving test.ini into a subdir..."
 mkdir subdir
