@@ -3,6 +3,7 @@ import datetime
 import uuid
 
 import ckan.model as m
+import ckan.logic as l
 from sqlalchemy import Table
 from sqlalchemy import Column
 from sqlalchemy import types
@@ -72,9 +73,11 @@ class ckanextEvent(DomainObject):
     @classmethod
     def delete(cls, id):
         # Delete single event
+        obj = Session.query(cls).filter_by(id=id).first()
+        if not obj:
+            raise l.NotFound
 
-        obj = Session.query(cls).filter_by(id=id)
-        obj.delete()
+        Session.delete(obj)
         Session.commit()
 
 

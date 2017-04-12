@@ -22,11 +22,8 @@ def event_delete(context, data_dict):
 
     id = toolkit.get_or_bust(data_dict, 'id')
 
-    event = ckanextEvent.delete(id=id)
+    ckanextEvent.delete(id=id)
 
-    if event == 0:
-        raise logic.NotFound
-    
     log.info('Event delete: %r', data_dict)
     return {
         'message': 'Event successfully deleted'
