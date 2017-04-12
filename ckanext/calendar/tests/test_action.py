@@ -173,7 +173,7 @@ class TestCalendarActions(ActionBase):
         result = helpers.call_action('event_list',
                                      context=context)
 
-        assert len(result) == 0
+        assert len(result['events']) == 0
 
     def test_event_list_with_single_event(self):
         user = factories.Sysadmin()
@@ -191,10 +191,11 @@ class TestCalendarActions(ActionBase):
         result = helpers.call_action('event_list',
                                      context=context)
 
-        assert len(result) == 1
-        assert result[0]['title'] == data_dict['title']
-        assert result[0]['start'] == data_dict['start']
-        assert result[0]['end'] == data_dict['end']
+        assert len(result['events']) == 1
+        events = result['events']
+        assert events[0]['title'] == data_dict['title']
+        assert events[0]['start'] == data_dict['start']
+        assert events[0]['end'] == data_dict['end']
 
     def test_event_list_with_ten_events(self):
         user = factories.Sysadmin()
@@ -215,12 +216,12 @@ class TestCalendarActions(ActionBase):
                                      context=context)
 
         # If 'limit' is not specified, the default is the last 5 created events
-        assert len(result) == 5
+        assert len(result['events']) == 5
 
         result = helpers.call_action('event_list',
                                      context=context, limit=8)
 
-        assert len(result) == 8
+        assert len(result['events']) == 8
 
     def test_event_patch_valid(self):
         user = factories.Sysadmin()
