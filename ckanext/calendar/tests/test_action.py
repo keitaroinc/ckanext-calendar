@@ -3,6 +3,7 @@ from nose.tools import assert_raises
 from ckan.tests import helpers, factories
 from ckan import plugins
 from ckan import logic
+from ckanext.calendar.model import setup as setup_calendar_db
 
 
 class ActionBase(object):
@@ -13,6 +14,8 @@ class ActionBase(object):
 
     def setup(self):
         helpers.reset_db()
+        setup_calendar_db()
+
 
     @classmethod
     def teardown_class(self):
