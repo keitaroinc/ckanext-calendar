@@ -69,41 +69,58 @@ class CalendarController(base.BaseController):
         }
         return toolkit.render('events/event_page.html', extra_vars)
 
-    def event_create(self, data=None):
-        # TODO: Handle errors
-        if request.method.lower() == 'post':
-            fields = {
-                'title': request.POST['event-name'],
-                'description': request.POST['event-description'],
-                'start': request.POST['add-event-start-date-input'],
-                'end': request.POST['add-event-end-date-input'],
-                'venue': request.POST['event-venue']
-            }
-            _get_action('event_create', fields)
+    def event_create(self, fields=None, errors=None):
+
+        if request.method.lower() == 'post' and not fields:
+            fields = dict(toolkit.request.POST)
+            try:
+                junk = _get_action('event_create', fields)
+            except toolkit.ValidationError, e:
+                errors = e.error_dict
+                return self.event_create(fields, errors)
+
             h.flash_success(_('The event was created successfully.'))
             redirect(h.url_for('event_index'))
 
-        return toolkit.render('events/event_form.html', extra_vars={})
+        if not fields:
+            fields = {}
+        errors = errors or {}
 
-    def event_update(self, id):
-        # TODO: Handle errors
-        event = _get_action('event_show', {'id': id})
         extra_vars = {
-            'event': event
+            'event': fields,
+            'errors': errors
         }
-        if request.method.lower() == 'post':
-            fields = {
-                'title': request.POST['event-name'],
-                'description': request.POST['event-description'],
-                'start': request.POST['add-event-start-date-input'],
-                'end': request.POST['add-event-end-date-input'],
-                'venue': request.POST['event-venue'],
-                'id':id
-            }
-            _get_action('event_update', fields)
-            h.flash_success(_('The event was updated successfully.'))
-            redirect(h.url_for('event_update', id=id))
+        return toolkit.render('events/event_form.html', extra_vars)
 
+    def event_update(self, id, fields=None, errors=None):
+
+        event = _get_action('event_show', {'id': id})
+
+        if request.method.lower() == 'post' and not fields:
+            fields = dict(toolkit.request.POST)
+            fields['id'] = id
+            log.debug(fields)
+            try:
+                junk = _get_action('event_update', fields)
+
+            except toolkit.ValidationError, e:
+                errors = e.error_dict
+                return self.event_update(id, fields, errors)
+
+            h.flash_success(_('The event was updated successfully.'))
+            redirect(h.url_for('event_show', id=id))
+
+        if not fields:
+            fields = event
+            fields['id'] = id
+        errors = errors or {}
+        event_current_title = event.get('title')
+
+        extra_vars = {
+            'event': fields,
+            'errors': errors,
+            'event_current_title': event_current_title
+        }
         return toolkit.render('events/event_update.html', extra_vars)
 
     def event_delete(self, id):
