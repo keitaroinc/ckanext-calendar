@@ -10,6 +10,7 @@ from sqlalchemy import types
 from sqlalchemy import Index
 
 from sqlalchemy.engine.reflection import Inspector
+from sqlalchemy.exc import NoSuchTableError
 from ckan.model.meta import metadata, mapper, Session
 from ckan.model.types import make_uuid
 from ckan.model.domain_object import DomainObject
@@ -36,6 +37,11 @@ def setup():
         log.debug('Event table already exist')
         from ckan.model.meta import engine
         inspector = Inspector.from_engine(engine)
+
+        try:
+            inspector.get_indexes("ckanext_event")
+        except NoSuchTableError:
+            event_table.create()
 
         index_names = [index['name'] for index in inspector.get_indexes("ckanext_event")]
         if not "ckanext_event_id_idx" in index_names:
