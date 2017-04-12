@@ -82,6 +82,9 @@ setup(
         [ckan.plugins]
         calendar=ckanext.calendar.plugin:CalendarPlugin
 
+        [paste.paster_command]
+        calendar = ckanext.calendar.commands:Calendar
+
         [babel.extractors]
         ckan = ckan.lib.extract:extract_ckan
     ''',
