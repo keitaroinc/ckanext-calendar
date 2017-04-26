@@ -8,6 +8,7 @@ from ckanext.calendar.logic.dictization import (
     event_dictize,
     event_list_dictize
 )
+from datetime import datetime
 
 log = logging.getLogger(__name__)
 
@@ -52,8 +53,16 @@ def event_list(context, data_dict):
 
     limit = data_dict.get('limit', 5)
     offset = data_dict.get('offset', 0)
+    future = data_dict.get('future_events', False)
+    
+    if future:
+        event_list = context['session'].query(ckanextEvent)\
+                        .filter(ckanextEvent.start >= datetime.utcnow())\
+                        .order_by(ckanextEvent.created_at.desc()) \
+                        .limit(limit).offset(offset).all()
+    else:
+        event_list = ckanextEvent.search(limit=limit, offset=offset, order='created_at desc')
 
-    event_list = ckanextEvent.search(limit=limit, offset=offset, order='created_at desc')
     cnt = context['session'].query(ckanextEvent).count()
 
     # TODO: Update tests
