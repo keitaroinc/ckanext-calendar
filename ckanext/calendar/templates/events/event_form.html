@@ -3,9 +3,11 @@
 
 {% set errors = errors or {} %}
 {% set event = event or {} %}
+{% set controller = 'ckanext.calendar.controllers.calendar:CalendarController' %}
 
-{% block toolbar %}
-{{ super() }}
+{% block breadcrumb_content %}
+  <li>{{ h.nav_link(_('Events'), controller=controller, action='event_index', highlight_actions = 'new index') }}</li>
+  <li class="active">{% link_for _('Add event'), controller=controller, action='event_create' %}</li>
 {% endblock %}
 
 {% block page_header %}

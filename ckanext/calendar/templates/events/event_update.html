@@ -11,6 +11,15 @@
 {% endblock %}
 {% set read_url = h.url_for('event_show', id=event.id) %}
 {% set cancel_url = h.url_for('event_index') %}
+{% set controller = 'ckanext.calendar.controllers.calendar:CalendarController' %}
+
+{% block breadcrumb_content %}
+  <li>{{ h.nav_link(_('Events'), controller=controller, action='event_index', highlight_actions = 'new index') }}</li>
+  <li>{% link_for _(event.title), controller=controller, action='event_show', id=event.id %}</li>
+  <li class="active">{% link_for _('Edit'), controller=controller, action='event_update', id=event.id %}</li>
+{% endblock %}
+
+
 {% block primary_content_inner %}
 <h1 class="page-heading">{{_('Edit Event')}} - <a href="{{ read_url }}" title="Edit {{ event_current_title }}">{{ event_current_title }}</a></h1>
 <form id="update-event-form" method="post">

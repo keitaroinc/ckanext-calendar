@@ -9,6 +9,12 @@
 {% block page_header %}
 {% endblock %}
 
+{% set controller = 'ckanext.calendar.controllers.calendar:CalendarController' %}
+
+{% block breadcrumb_content %}
+  <li class="active">{{ h.nav_link(_('Events'), controller=controller, action='event_index', highlight_actions = 'new index') }}</li>
+{% endblock %}
+
 
 {% block page_primary_action %}
 {% if h.check_access('event_create', {}) %}

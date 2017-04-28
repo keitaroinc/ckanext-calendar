@@ -8,6 +8,15 @@
 <link rel="stylesheet" href="/css/ckanext-calendar.css">
 {% endblock %}
 
+{% block toolbar %}
+  <div class="toolbar">
+        <ol class="breadcrumb">
+          <li class="home"><a href="{{ h.url_for('home') }}"><i class="fa fa-home"></i><span> {{ _('Home') }}</span></a></li>
+          {% block breadcrumb_content %}{% endblock %}
+        </ol>
+  </div>
+{% endblock %}
+
 {% block secondary_content %}
 <div class="module module-narrow module-shallow">
   <h2 class="module-heading">
