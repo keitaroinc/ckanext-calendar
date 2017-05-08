@@ -57,7 +57,7 @@ def event_list(context, data_dict):
     
     if future:
         event_list = context['session'].query(ckanextEvent)\
-                        .filter(ckanextEvent.start >= datetime.utcnow())\
+                        .filter(ckanextEvent.start >= datetime.utcnow().utcnow().date())\
                         .order_by(ckanextEvent.created_at.desc()) \
                         .limit(limit).offset(offset).all()
     else:
