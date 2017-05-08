@@ -21,7 +21,7 @@
 
 
 {% block primary_content_inner %}
-<h1 class="page-heading">{{_('Edit Event')}} - <a href="{{ read_url }}" title="Edit {{ event_current_title }}">{{ event_current_title }}</a></h1>
+<h1 class="page-heading">{{_('Edit')}}: <a href="{{ read_url }}" title="Edit {{ event_current_title }}">{{ event_current_title }}</a></h1>
 <form id="update-event-form" method="post">
   <div class="form-group">
     {{ form.input('title', id='title', value=event.title, error=errors.title, label=_('Name'), placeholder='Name your event', classes=['control-full ', 'control-large'], is_required=true) }}
