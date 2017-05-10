@@ -1,4 +1,6 @@
 from nose.tools import assert_raises
+from datetime import datetime
+from datetime import timedelta
 
 from ckan.tests import helpers, factories
 from ckan import plugins
@@ -24,15 +26,19 @@ class ActionBase(object):
 
 
 class TestCalendarActions(ActionBase):
+
+
     def test_event_create_valid(self):
         user = factories.Sysadmin()
         context = {'user': user['name']}
+        start = datetime.utcnow().date()
+        end = datetime.utcnow().date() + timedelta(days=1)
         data_dict = {
             'title': 'Test event',
             'venue': 'Shirok Sokak',
             'description': 'Making the world a better place',
-            'start': '2017-02-23 17:00:00',
-            'end': '2017-02-23 21:00:00',
+            'start': str(start),
+            'end': str(end),
         }
 
         result = helpers.call_action('event_create',
@@ -76,10 +82,12 @@ class TestCalendarActions(ActionBase):
     def test_event_delete_valid(self):
         user = factories.Sysadmin()
         context = {'user': user['name']}
+        start = datetime.utcnow().date()
+        end = datetime.utcnow().date() + timedelta(days=1)
         data_dict = {
             'title': 'Test event',
-            'start': '2017-02-23 17:00:00',
-            'end': '2017-02-23 21:00:00',
+            'start': str(start),
+            'end': str(end)
         }
 
         result = helpers.call_action('event_create',
@@ -123,10 +131,12 @@ class TestCalendarActions(ActionBase):
     def test_event_show_valid(self):
         user = factories.Sysadmin()
         context = {'user': user['name']}
+        start = datetime.utcnow().date()
+        end = datetime.utcnow().date() + timedelta(days=1)
         data_dict_create = {
             'title': 'Test event',
-            'start': '2017-02-23 17:00:00',
-            'end': '2017-02-23 21:00:00',
+            'start': str(start),
+            'end': str(end)
         }
 
         result = helpers.call_action('event_create',
@@ -142,8 +152,8 @@ class TestCalendarActions(ActionBase):
                                      context=context, **data_dict_show)
 
         assert result['title'] == data_dict_create['title']
-        assert result['start'] == data_dict_create['start']
-        assert result['end'] == data_dict_create['end']
+        assert result['start'].split(" ")[0] == data_dict_create['start']
+        assert result['end'].split(" ")[0] == data_dict_create['end']
 
     def test_event_show_missing_id(self):
         # 'id' is a required value
@@ -181,11 +191,13 @@ class TestCalendarActions(ActionBase):
     def test_event_list_with_single_event(self):
         user = factories.Sysadmin()
         context = {'user': user['name']}
+        start = datetime.utcnow().date()
+        end = datetime.utcnow().date() + timedelta(days=1)
 
         data_dict = {
             'title': 'Test event',
-            'start': '2017-02-23 17:00:00',
-            'end': '2017-02-23 21:00:00',
+            'start': str(start),
+            'end': str(end),
         }
 
         helpers.call_action('event_create',
@@ -197,17 +209,19 @@ class TestCalendarActions(ActionBase):
         assert len(result['events']) == 1
         events = result['events']
         assert events[0]['title'] == data_dict['title']
-        assert events[0]['start'] == data_dict['start']
-        assert events[0]['end'] == data_dict['end']
+        assert events[0]['start'].split(" ")[0] == data_dict['start']
+        assert events[0]['end'].split(" ")[0] == data_dict['end']
 
     def test_event_list_with_ten_events(self):
         user = factories.Sysadmin()
         context = {'user': user['name']}
+        start = datetime.utcnow().date()
+        end = datetime.utcnow().date() + timedelta(days=1)
 
         data_dict = {
             'title': 'Test event',
-            'start': '2017-02-23 17:00:00',
-            'end': '2017-02-23 21:00:00',
+            'start': str(start),
+            'end': str(end),
         }
 
         # Create 10 events
@@ -229,10 +243,13 @@ class TestCalendarActions(ActionBase):
     def test_event_patch_valid(self):
         user = factories.Sysadmin()
         context = {'user': user['name']}
+        start = datetime.utcnow().date()
+        end = datetime.utcnow().date() + timedelta(days=1)
+
         data_dict_create = {
             'title': 'Test event',
-            'start': '2017-02-23 17:00:00',
-            'end': '2017-02-23 21:00:00',
+            'start': str(start),
+            'end': str(end),
         }
 
         result = helpers.call_action('event_create',
@@ -249,8 +266,8 @@ class TestCalendarActions(ActionBase):
                                      context=context, **data_dict_patch)
 
         assert result['title'] == data_dict_patch['title']
-        assert result['start'] == data_dict_create['start']
-        assert result['end'] == data_dict_create['end']
+        assert result['start'].split(" ")[0] == data_dict_create['start']
+        assert result['end'].split(" ")[0] == data_dict_create['end']
 
     def test_event_patch_missing_id(self):
         # 'id' is a required value
@@ -279,32 +296,37 @@ class TestCalendarActions(ActionBase):
     def test_event_update_valid(self):
         user = factories.Sysadmin()
         context = {'user': user['name']}
+        start = datetime.utcnow().date()
+        end = datetime.utcnow().date() + timedelta(days=1)
+
         data_dict = {
             'title': 'Test event',
             'venue': 'Shirok Sokak',
             'description': 'Making the world a better place',
-            'start': '2017-02-23 17:00:00',
-            'end': '2017-02-23 21:00:00',
+            'start': str(start),
+            'end': str(end),
         }
 
         result = helpers.call_action('event_create',
                                      context=context, **data_dict)
 
         event_id = result['id']
+        start = start + timedelta(days=1)
+        end = end + timedelta(days=1)
 
         data_dict = {
             'id': event_id,
             'title': 'Updated event title',
-            'start': '2017-02-24 17:00:00',
-            'end': '2017-02-24 21:00:00'
+            'start': str(start),
+            'end': str(end),
         }
 
         result = helpers.call_action('event_update',
                                      context=context, **data_dict)
 
         assert result['title'] == data_dict['title']
-        assert result['start'] == data_dict['start']
-        assert result['end'] == data_dict['end']
+        assert result['start'].split(" ")[0] == data_dict['start']
+        assert result['end'].split(" ")[0] == data_dict['end']
 
     def test_event_update_missing_values(self):
         # 'id' , 'title', 'start' and 'end' are required values
@@ -322,12 +344,15 @@ class TestCalendarActions(ActionBase):
 
         user = factories.Sysadmin()
         context = {'user': user['name']}
+        start = datetime.utcnow().date()
+        end = datetime.utcnow().date() + timedelta(days=1)
+
         data_dict = {
             'title': 'Test event',
             'venue': 'Shirok Sokak',
             'description': 'Making the world a better place',
-            'start': '2017-02-23 17:00:00',
-            'end': '2017-02-23 21:00:00',
+            'start': str(start),
+            'end': str(end),
         }
 
         result = helpers.call_action('event_create',
