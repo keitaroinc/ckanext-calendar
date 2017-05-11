@@ -9,6 +9,13 @@ import ckanext.calendar.logic.auth as pauth
 
 from routes.mapper import SubMapper
 
+try:
+    # CKAN 2.7 and later
+    from ckan.common import config as _config
+except ImportError:
+    # CKAN 2.6 and earlier
+    from pylons import config as _config
+
 log = logging.getLogger(__name__)
 
 
@@ -59,7 +66,8 @@ class CalendarPlugin(plugins.SingletonPlugin):
     def get_helpers(self):
         return {
             'calendar_get_current_url': _h.calendar_get_current_url,
-            'calendar_get_recent_events': _h.calendar_get_recent_events
+            'calendar_get_recent_events': _h.calendar_get_recent_events,
+            'calendar_truncate_limit': lambda: _config.get('ckanext.calendar.truncate_limit', 100)
         }
 
     # IRouter
