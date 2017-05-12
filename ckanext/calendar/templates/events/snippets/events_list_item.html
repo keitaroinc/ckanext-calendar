@@ -3,7 +3,7 @@
 <div class="events-list-item">
   <div class="row">
     <div class="col-lg-9">
-      <h3 class="page-heading"><a href="{{ event_url }}" title="View {{ event.title }}">{{ event.title }}</a></h3>
+      <h2 class="event-item-title"><a href="{{ event_url }}" title="View {{ event.title }}">{{ event.title }}</a></h2>
     </div>
   </div>
   <div class="row">
@@ -16,7 +16,11 @@
     <div class="col-lg-3">
       <dl class="list-event-meta">
         <dt><span class="fa fa-globe"></span><span class="fa-label">Venue</span></dt>
-        <dd>{{event.venue}}</dd>
+        {% if event.venue %}
+        <dd>{{ event.venue }}</dd>
+        {% else %}
+        <dd>{{ _('No venue provided.') }}</dd>
+        {% endif %}
       </dl>
     </div>
     <div class="col-lg-3">
@@ -31,19 +35,17 @@
           {% block eventaction %}
           {% if h.check_access('event_update', {}) %}
           {% set edit_url = h.url_for('event_update', id=event.id) %}
-            <a href="{{edit_url}}" class="btn btn-default"><span class="sr-only">{{_('Edit')}}</span><span class="fa fa-pencil"></span></a>
+          <a href="{{edit_url}}" class="btn btn-default"><span class="sr-only">{{_('Edit')}}</span><span class="fa fa-pencil"></span></a>
           {% endif %}
           {% endblock %}
-          <!--<button class="btn btn-default" ><span class="sr-only">{{_('Edit')}}</span><span class="fa fa-pencil"></span></button>-->
         </li>
         <li>
           {% block eventactions %}
           {% if h.check_access('event_update', {}) %}
           {% set delete_url = h.url_for('event_delete', id=event.id) %}
-            <a href="{{delete_url}}" class="btn btn-danger"><span class="sr-only">{{_('Delete')}}</span><span class="fa fa-trash"></span></a>
+          <a href="{{delete_url}}" class="btn btn-danger"><span class="sr-only">{{_('Delete')}}</span><span class="fa fa-trash"></span></a>
           {% endif %}
           {% endblock %}
-          <!--<button class="btn btn-danger" ><span class="sr-only">{{_('Delete')}}</span><span class="fa fa-trash"></span></button>-->
         </li>
       </ul>
     </div>
@@ -51,9 +53,13 @@
   <div class="row">
     <div class="col-lg-9">
       {% if event.description %}
-      <p>{{ h.render_markdown(event.description|truncate(400)) }}</p>
+      <p>{{ h.render_markdown(event.description)|truncate(400, False) }}</p>
       {% else %}
       <p>{{ _('No description provided.') }}</p>
+      {% endif %}
+
+      {% if ( h.render_markdown(event.description)|length  > h.render_markdown(event.description)|truncate(h.calendar_truncate_limit())|length ) %}
+      <a href="{{ event_url }}" class="btn btn-sm btn-read-more btn-default">{{_('Read mode')}}</a>
       {% endif %}
     </div>
   </div>

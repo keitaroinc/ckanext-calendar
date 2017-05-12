@@ -12,7 +12,7 @@
 {% set controller = 'ckanext.calendar.controllers.calendar:CalendarController' %}
 
 {% block breadcrumb_content %}
-  <li class="active">{{ h.nav_link(_('Events'), controller=controller, action='event_index', highlight_actions = 'new index') }}</li>
+<li class="active">{{ h.nav_link(_('Events'), controller=controller, action='event_index', highlight_actions = 'new index') }}</li>
 {% endblock %}
 
 
@@ -33,7 +33,6 @@
 
 {% block events_pagination %}
 {{h.snippet('events/snippets/pagination.html', current=c.page, per_page=c.limit, total=c.total)}}
-</nav>
 {% endblock %}
 
 {% endblock %}

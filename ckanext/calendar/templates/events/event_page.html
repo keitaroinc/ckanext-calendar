@@ -13,8 +13,8 @@
 {% set controller = 'ckanext.calendar.controllers.calendar:CalendarController' %}
 
 {% block breadcrumb_content %}
-  <li>{{ h.nav_link(_('Events'), controller=controller, action='event_index', highlight_actions = 'new index') }}</li>
-  <li class="active">{% link_for _(event.title), controller=controller, action='event_show', id=event.id %}</li>
+<li>{{ h.nav_link(_('Events'), controller=controller, action='event_index', highlight_actions = 'new index') }}</li>
+<li class="active">{% link_for _(event.title), controller=controller, action='event_show', id=event.id %}</li>
 {% endblock %}
 
 
@@ -23,7 +23,7 @@
   <div class="events-list-item">
     <div class="row">
       <div class="col-lg-9">
-        <h1 class="page-heading"><a href="{{ event_url }}" title="View {{ event.title }}">{{ event.title }}</a></h1>
+        <h1 class="event-item-title"><a href="{{ event_url }}" title="View {{ event.title }}">{{ event.title }}</a></h1>
       </div>
     </div>
     <div class="row">
@@ -36,7 +36,11 @@
       <div class="col-lg-3">
         <dl class="list-event-meta">
           <dt><span class="fa fa-globe"></span><span class="fa-label">Venue</span></dt>
-          <dd>{{event.venue}}</dd>
+          {% if event.venue %}
+          <dd>{{ event.venue }}</dd>
+          {% else %}
+          <dd>{{ _('No venue provided.') }}</dd>
+          {% endif %}
         </dl>
       </div>
       <div class="col-lg-3">
@@ -44,6 +48,26 @@
           <dt><span class="fa fa-hourglass-o"></span><span class="fa-label">{{ _('Ends') }}</span></dt>
           <dd>{{ h.render_datetime(event.end, with_hours=True) }}</dd>
         </dl>
+      </div>
+      <div class="col-lg-3">
+        <ul class="list-inline event-actions">
+          <li>
+            {% block eventaction %}
+            {% if h.check_access('event_update', {}) %}
+            {% set edit_url = h.url_for('event_update', id=event.id) %}
+            <a href="{{edit_url}}" class="btn btn-default"><span class="sr-only">{{_('Edit')}}</span><span class="fa fa-pencil"></span></a>
+            {% endif %}
+            {% endblock %}
+          </li>
+          <li>
+            {% block eventactions %}
+            {% if h.check_access('event_update', {}) %}
+            {% set delete_url = h.url_for('event_delete', id=event.id) %}
+            <a href="{{delete_url}}" class="btn btn-danger"><span class="sr-only">{{_('Delete')}}</span><span class="fa fa-trash"></span></a>
+            {% endif %}
+            {% endblock %}
+          </li>
+        </ul>
       </div>
     </div>
     <div class="row">
@@ -56,20 +80,5 @@
       </div>
     </div>
   </div>
-  <form id="delete-event-form">
-    <div class="form-actions">
-      {% block eventdelete %}
-          {% if h.check_access('event_delete', {}) %}
-          {% link_for _('Delete'), controller='ckanext.calendar.controllers.calendar:CalendarController', id=event.id, action='event_delete', class_='btn btn-danger pull-left' %}
-          {% endif %}
-      {% endblock %}
-      <!--<button class="btn btn-danger pull-left" name="save" type="submit">{{_('Delete Event')}}</button>-->
-      {% block eventupdate %}
-          {% if h.check_access('event_update', {}) %}
-          {% link_for _('Edit'), controller='ckanext.calendar.controllers.calendar:CalendarController', id=event.id, action='event_update', class_='btn btn-primary' %}
-          {% endif %}
-      {% endblock %}
-    </div>
-  </form>
 </div>
 {% endblock %}
