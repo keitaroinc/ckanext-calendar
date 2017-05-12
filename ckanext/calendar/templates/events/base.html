@@ -37,11 +37,11 @@
       <span class="fa-label">{{_('Recent Events')}}</span>
     </h2>
     <div class="module-content">
-      <ul class="list-arrows">
+      <ul class="list-recent">
         {% set recent_events = h.calendar_get_recent_events() %}
         {% if recent_events %}
           {% for event in recent_events %}
-            <li><a href="{{h.url_for('event_show', id=event.id)}}">{{event.title}}</a></li>
+            <li><span class="fa fa-calendar"></span><a href="{{h.url_for('event_show', id=event.id)}}">{{event.title}}</a></li>
           {% endfor %}
         {% else %}
           {{ _('No events are created in the system.') }}

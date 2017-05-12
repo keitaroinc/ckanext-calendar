@@ -33,3 +33,13 @@
     display: inline: block;
     margin: 10px 0;
 }
+
+.list-recent{
+    padding-left: 0;
+    list-style: none;
+    line-height: 1.8;
+}
+
+.list-recent a{
+    padding: 10px;
+}
