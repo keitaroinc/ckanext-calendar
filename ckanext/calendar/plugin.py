@@ -2,6 +2,7 @@ import logging
 
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
+from ckan.lib.plugins import DefaultTranslation
 
 from ckanext.calendar.model import setup as model_setup
 import ckanext.calendar.helpers as _h
@@ -19,7 +20,8 @@ except ImportError:
 log = logging.getLogger(__name__)
 
 
-class CalendarPlugin(plugins.SingletonPlugin):
+class CalendarPlugin(plugins.SingletonPlugin, DefaultTranslation):
+    plugins.implements(plugins.ITranslation)
     plugins.implements(plugins.IActions)
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IConfigurable)

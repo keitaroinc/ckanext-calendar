@@ -1,0 +1,207 @@
+# Translations template for ckanext-calendar.
+# Copyright (C) 2017 ORGANIZATION
+# This file is distributed under the same license as the ckanext-calendar
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ckanext-calendar 0.0.1\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2017-05-17 12:16+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.3.4\n"
+
+#: ckanext/calendar/controllers/calendar.py:65
+msgid "Event not found"
+msgstr ""
+
+#: ckanext/calendar/controllers/calendar.py:82
+msgid "The event was created successfully."
+msgstr ""
+
+#: ckanext/calendar/controllers/calendar.py:110
+msgid "The event was updated successfully."
+msgstr ""
+
+#: ckanext/calendar/controllers/calendar.py:129
+msgid "The event was removed successfully."
+msgstr ""
+
+#: ckanext/calendar/logic/auth.py:17
+msgid "User {0} not authorized to create events"
+msgstr ""
+
+#: ckanext/calendar/logic/auth.py:31
+msgid "User {0} not authorized to update events"
+msgstr ""
+
+#: ckanext/calendar/logic/auth.py:45
+msgid "User {0} not authorized to patch events"
+msgstr ""
+
+#: ckanext/calendar/logic/auth.py:58
+msgid "User {0} not authorized to delete events"
+msgstr ""
+
+#: ckanext/calendar/logic/schema.py:43
+msgid "Start date is in the past"
+msgstr ""
+
+#: ckanext/calendar/logic/schema.py:45
+msgid "Incorrect start date format, should be YYYY-MM-DD"
+msgstr ""
+
+#: ckanext/calendar/logic/schema.py:48
+msgid "Start date can not be in past!"
+msgstr ""
+
+#: ckanext/calendar/logic/schema.py:65
+msgid "Incorrect end date format, should be YYYY-MM-DD"
+msgstr ""
+
+#: ckanext/calendar/logic/schema.py:69
+msgid "Incorect end date, should be greater than start date"
+msgstr ""
+
+#: ckanext/calendar/templates/events/base.html:14
+msgid "Home"
+msgstr ""
+
+#: ckanext/calendar/templates/events/base.html:24
+#: ckanext/calendar/templates/events/event_form.html:9
+#: ckanext/calendar/templates/events/event_page.html:16
+#: ckanext/calendar/templates/events/event_update.html:17
+#: ckanext/calendar/templates/events/events_list.html:15
+msgid "Events"
+msgstr ""
+
+#: ckanext/calendar/templates/events/base.html:28
+msgid ""
+"Some well-written description needs to be added here. When writing it, please"
+" think about what content the page includes, which actions it offers and "
+"which elements are instantly visible. This block should be used to provide "
+"extra information for the users, in case they are not sure what they are "
+"looking at."
+msgstr ""
+
+#: ckanext/calendar/templates/events/base.html:37
+msgid "Recent Events"
+msgstr ""
+
+#: ckanext/calendar/templates/events/base.html:47
+msgid "No events are created in the system."
+msgstr ""
+
+#: ckanext/calendar/templates/events/event_form.html:10
+msgid "Add event"
+msgstr ""
+
+#: ckanext/calendar/templates/events/event_form.html:18
+#: ckanext/calendar/templates/events/events_list.html:21
+msgid "Add Event"
+msgstr ""
+
+#: ckanext/calendar/templates/events/event_form.html:21
+#: ckanext/calendar/templates/events/event_update.html:27
+msgid "Name"
+msgstr ""
+
+#: ckanext/calendar/templates/events/event_form.html:21
+msgid "Name your event"
+msgstr ""
+
+#: ckanext/calendar/templates/events/event_form.html:24
+#: ckanext/calendar/templates/events/event_update.html:30
+msgid "Start date"
+msgstr ""
+
+#: ckanext/calendar/templates/events/event_form.html:24
+msgid "Start date of the event"
+msgstr ""
+
+#: ckanext/calendar/templates/events/event_form.html:28
+#: ckanext/calendar/templates/events/event_update.html:34
+msgid "End date"
+msgstr ""
+
+#: ckanext/calendar/templates/events/event_form.html:28
+msgid "End date of the event"
+msgstr ""
+
+#: ckanext/calendar/templates/events/event_form.html:32
+#: ckanext/calendar/templates/events/event_update.html:38
+msgid "Venue"
+msgstr ""
+
+#: ckanext/calendar/templates/events/event_form.html:32
+#: ckanext/calendar/templates/events/event_update.html:38
+msgid "Where is the event talking place?"
+msgstr ""
+
+#: ckanext/calendar/templates/events/event_form.html:33
+#: ckanext/calendar/templates/events/event_update.html:39
+msgid "Description"
+msgstr ""
+
+#: ckanext/calendar/templates/events/event_form.html:33
+#: ckanext/calendar/templates/events/event_update.html:39
+msgid "Describe the event briefly or in more details"
+msgstr ""
+
+#: ckanext/calendar/templates/events/event_form.html:38
+#: ckanext/calendar/templates/events/event_update.html:44
+msgid "Cancel"
+msgstr ""
+
+#: ckanext/calendar/templates/events/event_form.html:39
+#: ckanext/calendar/templates/events/event_update.html:45
+msgid "Save"
+msgstr ""
+
+#: ckanext/calendar/templates/events/event_page.html:32
+#: ckanext/calendar/templates/events/snippets/events_list_item.html:12
+msgid "Starts"
+msgstr ""
+
+#: ckanext/calendar/templates/events/event_page.html:42
+#: ckanext/calendar/templates/events/snippets/events_list_item.html:22
+msgid "No venue provided."
+msgstr ""
+
+#: ckanext/calendar/templates/events/event_page.html:48
+#: ckanext/calendar/templates/events/snippets/events_list_item.html:28
+msgid "Ends"
+msgstr ""
+
+#: ckanext/calendar/templates/events/event_page.html:58
+#: ckanext/calendar/templates/events/event_update.html:19
+#: ckanext/calendar/templates/events/event_update.html:24
+#: ckanext/calendar/templates/events/snippets/events_list_item.html:38
+msgid "Edit"
+msgstr ""
+
+#: ckanext/calendar/templates/events/event_page.html:66
+#: ckanext/calendar/templates/events/snippets/events_list_item.html:46
+msgid "Delete"
+msgstr ""
+
+#: ckanext/calendar/templates/events/event_page.html:78
+#: ckanext/calendar/templates/events/snippets/events_list_item.html:58
+msgid "No description provided."
+msgstr ""
+
+#: ckanext/calendar/templates/events/events_list.html:31
+msgid "No events found."
+msgstr ""
+
+#: ckanext/calendar/templates/events/snippets/events_list_item.html:62
+msgid "Read mode"
+msgstr ""
+
