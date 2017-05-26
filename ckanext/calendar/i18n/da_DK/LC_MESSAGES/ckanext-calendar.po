@@ -209,4 +209,3 @@ msgstr "Ingen begivenhed fundet"
 #: ckanext/calendar/templates/events/snippets/events_list_item.html:62
 msgid "Read mode"
 msgstr "Læse tilstand"
-
