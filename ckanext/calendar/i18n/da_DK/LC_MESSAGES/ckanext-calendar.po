@@ -49,7 +49,7 @@ msgstr " Bruger {0} har ikke rettigheder til at patch'e en begivenhed"
 
 #: ckanext/calendar/logic/auth.py:58
 msgid "User {0} not authorized to delete events"
-msgstr "Bruger {0} har ikke rettigheder til at slette en begivenhed""
+msgstr "Bruger {0} har ikke rettigheder til at slette en begivenhed"
 
 #: ckanext/calendar/logic/schema.py:43
 msgid "Start date is in the past"
