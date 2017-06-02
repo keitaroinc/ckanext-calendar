@@ -45,7 +45,7 @@ msgstr " Bruger {0} har ikke rettigheder til at redigere en begivenhed"
 
 #: ckanext/calendar/logic/auth.py:45
 msgid "User {0} not authorized to patch events"
-msgstr " Bruger {0} har ikke rettigheder til at patch'e en begivenhed"
+msgstr " Bruger {0} har ikke rettigheder til at rette en begivenhed"
 
 #: ckanext/calendar/logic/auth.py:58
 msgid "User {0} not authorized to delete events"
@@ -92,8 +92,8 @@ msgid ""
 "sure what they are looking at."
 msgstr ""
 "Her vises begivenheder med relevans for brugere af energidata. Det kan "
-"være oplysning om events, nye datasæt eller frigivelse af nye tjenester"
-"hvor data bliver anvendt. Begivenheder kan også være frigivelse af ny"
+"være oplysninger om events, nye datasæt eller frigivelse af nye tjenester "
+"hvor data bliver anvendt. Begivenheder kan også være frigivelse af nye "
 "funktioner i Energi Data Service og nye versioner"
 
 #: ckanext/calendar/templates/events/base.html:37
@@ -163,7 +163,7 @@ msgstr "Beskriv begivendenheden"
 #: ckanext/calendar/templates/events/event_form.html:38
 #: ckanext/calendar/templates/events/event_update.html:44
 msgid "Cancel"
-msgstr "Afbryd"
+msgstr "Fortryd"
 
 #: ckanext/calendar/templates/events/event_form.html:39
 #: ckanext/calendar/templates/events/event_update.html:45
@@ -208,4 +208,4 @@ msgstr "Ingen begivenhed fundet"
 
 #: ckanext/calendar/templates/events/snippets/events_list_item.html:62
 msgid "Read mode"
-msgstr "Læse tilstand"
+msgstr "Læs mere"
