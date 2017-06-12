@@ -37,6 +37,12 @@ Number of events shown in the recent events sidebar, defaults to 5::
 ckanext.calendar.recent_events_limit = 10
 ```
 
+The limit for truncating event description, default: 100
+
+```
+ckanext.calendar.truncate_limit = ...
+```
+
 
 ## API
 
