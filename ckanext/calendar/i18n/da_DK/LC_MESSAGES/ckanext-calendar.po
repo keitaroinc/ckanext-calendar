@@ -85,16 +85,14 @@ msgstr "Begivenheder"
 
 #: ckanext/calendar/templates/events/base.html:28
 msgid ""
-"Some well-written description needs to be added here. When writing it, "
-"please think about what content the page includes, which actions it "
-"offers and which elements are instantly visible. This block should be "
-"used to provide extra information for the users, in case they are not "
-"sure what they are looking at."
+"Here are listed events that may be relevant to the users of energy data. "
+"It could be information about new datasets or the release of new data-driven services. "
+"Events may also be the release of new features in Energy Data Service and new versions."
 msgstr ""
 "Her vises begivenheder med relevans for brugere af energidata. Det kan "
 "være oplysninger om events, nye datasæt eller frigivelse af nye tjenester "
 "hvor data bliver anvendt. Begivenheder kan også være frigivelse af nye "
-"funktioner i Energi Data Service og nye versioner"
+"funktioner i Energi Data Service og nye versioner."
 
 #: ckanext/calendar/templates/events/base.html:37
 msgid "Recent Events"
