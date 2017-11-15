@@ -1,6 +1,6 @@
 # ckanext-calendar
 
-![Travis CI Build](https://travis-ci.com/ViderumGlobal/ckanext-calendar.svg?token=pzRbH1jQsFTh9wzwvJtq&branch=master)
+[![Build Status](https://travis-ci.com/ViderumGlobal/ckanext-calendar.svg?token=spv2MuNH6PW4oxEpxfeY&branch=master)](https://travis-ci.com/ViderumGlobal/ckanext-calendar)
 
 This extension provides an API for using calendar events in CKAN. Standard CRUD
 operations can be used.
