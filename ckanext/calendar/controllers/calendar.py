@@ -17,7 +17,7 @@ import ckan.plugins as p
 
 
 log = logging.getLogger(__name__)
-redirect = base.redirect
+redirect = toolkit.redirect_to
 
 
 def _get_context():
