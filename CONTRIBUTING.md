@@ -20,7 +20,7 @@
 
 #### **Do you have questions about the source code?**
 
-* Ask any question about how to use ckanext-saml2auth in our [gitter chat](https://gitter.im/keitaroinc/ckan).
+* Ask any question about how to use ckanext-calendar in our [gitter chat](https://gitter.im/keitaroinc/ckan).
 
 Thanks!
 
