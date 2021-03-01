@@ -1,4 +1,4 @@
-## How to contribute to ckanext-saml2auth
+## How to contribute to ckanext-calendar
 
 #### **Did you find a bug?**
 
