@@ -2,9 +2,9 @@
 
 #### **Did you find a bug?**
 
-* **Ensure the bug was not already reported** by searching on GitHub under [Issues](https://github.com/keitaroinc/ckanext-saml2auth/issues).
+* **Ensure the bug was not already reported** by searching on GitHub under [Issues](https://github.com/keitaroinc/ckanext-calendar/issues).
 
-* If you're unable to find an open issue addressing the problem, [open a new one](https://github.com/keitaroinc/ckanext-saml2auth/issues/new). Be sure to include a **title and clear description**, as much relevant information as possible, we include an issue template to help out in filling-in the issue.
+* If you're unable to find an open issue addressing the problem, [open a new one](https://github.com/keitaroinc/ckanext-calendar/issues/new). Be sure to include a **title and clear description**, as much relevant information as possible, we include an issue template to help out in filling-in the issue.
 
 #### **Did you write a patch that fixes a bug?**
 
@@ -14,7 +14,7 @@
 
 #### **Do you intend to add a new feature or change an existing one?**
 
-* [Create a new feature issue](https://github.com/keitaroinc/ckanext-saml2auth/issues/new) using the Feature Request template and describe your proposed changes
+* [Create a new feature issue](https://github.com/keitaroinc/ckanext-calendar/issues/new) using the Feature Request template and describe your proposed changes
 
 * Submit a pull request referring to the relevant feature issue/s
 
