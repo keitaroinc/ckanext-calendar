@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -
 """
 Copyright (c) 2017 Keitaro AB
 
@@ -15,7 +16,6 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-# -*- coding: utf-8 -
 import logging
 import uuid
 import ckan.model as m
